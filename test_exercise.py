@@ -110,5 +110,4 @@ def test_exercise():
         expect(page.locator(username_selector)).to_be_visible()
         expect(page.locator(password_selector)).to_be_visible()
         
-        #Change time value (seconds) for debugging purposes.
-        time.sleep(500)
+        #THE END
