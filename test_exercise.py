@@ -1,6 +1,5 @@
 from playwright.sync_api import sync_playwright, expect
-import re, time
-
+import re
 
 def test_exercise():
     with sync_playwright() as p:
@@ -38,14 +37,13 @@ def test_exercise():
         page.click(cart_selector)
         #We verify that the cart page is correct
         expect(page).to_have_url("https://www.saucedemo.com/cart.html")
-        print("la url es correcta")
+        
         #We click on checkout
         page.click("//button[@id='checkout']")
         
         #We click on continue (empty)
         continue_button_selector = "//input[@id='continue']"
-        page.click(continue_button_selector)
-        
+        page.click(continue_button_selector) 
         
         #We verify that the error message appears with the correct text
         error_message_selector = 'h3[data-test="error"]'
@@ -88,10 +86,8 @@ def test_exercise():
 
         expected_total = subtotal_amount + tax_amount
 
-        
         assert abs(total_amount - expected_total) < 0.01, f"Expected total: {expected_total}, but got: {total_amount}"
-        print(f"El total calculado ({expected_total}) coincide con el total mostrado ({total_amount}).")
-
+        
         #We press the Finish button
         page.click("//button[@id='finish']")
 
@@ -99,7 +95,6 @@ def test_exercise():
         confirmation_message_selector = 'h2.complete-header[data-test="complete-header"]'
         expect(page.locator(confirmation_message_selector)).to_have_text("Thank you for your order!")
 
-        print("El mensaje de confirmación es correcto.")
         #We press the button to return
         page.click("//button[@id='back-to-products']")
         #click on the menu
@@ -107,8 +102,7 @@ def test_exercise():
         # Click the logout button
         logout_selector = "[data-test='logout-sidebar-link']"
         page.click(logout_selector)
-        print("Hiciste clic en el botón de logout.")
-
+        
         # Verify that user fields are visible
         username_selector = 'input[data-test="username"]'
         password_selector = 'input[data-test="password"]'
@@ -116,6 +110,5 @@ def test_exercise():
         expect(page.locator(username_selector)).to_be_visible()
         expect(page.locator(password_selector)).to_be_visible()
         
-
         #Change time value (seconds) for debugging purposes.
         time.sleep(500)
