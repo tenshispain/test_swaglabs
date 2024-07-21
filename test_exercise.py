@@ -22,19 +22,20 @@ def test_exercise():
         page.click("//button[@id='add-to-cart-sauce-labs-bike-light']")
 
         #to click on the tshirt button
-        
         expect(page.locator("//button[@id='add-to-cart-sauce-labs-bolt-t-shirt']")).to_have_text('Add to cart')
         page.click("//button[@id='add-to-cart-sauce-labs-bolt-t-shirt']")
-        # We remove the backpack by verifying before that it says Remove on the button
         
+        # We remove the backpack by verifying before that it says Remove on the button
         expect(page.locator("//button[@id='remove-sauce-labs-backpack']")).to_have_text('Remove')
         page.click("//button[@id='remove-sauce-labs-backpack']")
+        
         # We verify that it says add to cart again
         expect(page.locator("//button[@id='add-to-cart-sauce-labs-backpack']")).to_have_text('Add to cart')
        
         #click on the shopping cart
         cart_selector = "[data-test='shopping-cart-link']"
         page.click(cart_selector)
+        
         #We verify that the cart page is correct
         expect(page).to_have_url("https://www.saucedemo.com/cart.html")
         
@@ -85,7 +86,6 @@ def test_exercise():
         total_amount = extract_amount(total_text)
 
         expected_total = subtotal_amount + tax_amount
-
         assert abs(total_amount - expected_total) < 0.01, f"Expected total: {expected_total}, but got: {total_amount}"
         
         #We press the Finish button
@@ -106,7 +106,6 @@ def test_exercise():
         # Verify that user fields are visible
         username_selector = 'input[data-test="username"]'
         password_selector = 'input[data-test="password"]'
-        
         expect(page.locator(username_selector)).to_be_visible()
         expect(page.locator(password_selector)).to_be_visible()
         
